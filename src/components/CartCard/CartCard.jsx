@@ -1,21 +1,27 @@
 import React from "react";
 import "./CartCard.css"
-import image1 from "./assets/image1.jpg"
+import image1 from "../../assets/image1.jpg"
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { removeItem } from "../../cartSlice";
+import { useDispatch } from "react-redux";
 
-function CartCard() {
+function CartCard({name,price,image,id}) {
+  let dispatch = useDispatch()
   return (
     <div className="Cartcard">
       <div className="left-card">
-        <img src={image1} alt="" />
+        <img src={image} alt="" />
         <div className="name-price">
-          <span></span>
-          <span></span>
+          <span>{name}</span>
+          <span>RS {price}</span>
         </div>
       </div>
 
       <div className="right-card">
-        <button>
+        <button onClick={()=>{
+          dispatch(removeItem(id))
+           alert("Products Removed Successfully...")
+        }}>
           Remove
           <RiDeleteBin6Line />
         </button>
@@ -24,4 +30,4 @@ function CartCard() {
   );
 }
 
-export default cartCard;
+export default CartCard;
